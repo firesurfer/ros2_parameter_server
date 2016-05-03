@@ -20,10 +20,10 @@ macro(targets)
 	endif()
 	
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-
+        MESSAGE(rclcpp${target_suffix})
 	add_executable(ros2_parameter_server${target_suffix} src/main.cpp)
 	ament_target_dependencies(ros2_parameter_server${target_suffix}
-        	"rclcpp"
+                "rclcpp${target_suffix}"
 		"std_msgs"
 	)
    
