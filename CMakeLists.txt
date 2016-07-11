@@ -14,26 +14,20 @@ find_package(rmw REQUIRED)
 find_package(rmw_implementation_cmake REQUIRED)
 
 
-macro(targets)
-	if(NOT "${target_suffix} " STREQUAL " ")
-	  get_rclcpp_information("${rmw_implementation}" "rclcpp${target_suffix}")
-	endif()
-	
+
 	include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-        MESSAGE(rclcpp${target_suffix})
-	add_executable(ros2_parameter_server${target_suffix} src/main.cpp)
-	ament_target_dependencies(ros2_parameter_server${target_suffix}
+
+	add_executable(ros2_parameter_server src/main.cpp)
+	ament_target_dependencies(ros2_parameter_server
                 "rclcpp${target_suffix}"
 		"std_msgs"
 	)
    
-	install(TARGETS ros2_parameter_server${target_suffix}
+	install(TARGETS ros2_parameter_server
                 DESTINATION bin)
 
-endmacro()
 
 
 
-call_for_each_rmw_implementation(targets GENERATE_DEFAULT)
 
 ament_package()
